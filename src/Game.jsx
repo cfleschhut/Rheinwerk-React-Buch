@@ -9,6 +9,7 @@ export default class Game extends Component {
     super(props);
 
     this.state = {
+      selectedProperty: '',
       playersTurn: true,
       player: [new Animal('Elefant', 'placeholder.png', 3.3, 6000, 70, 1, 40)],
       computer: [
@@ -17,9 +18,16 @@ export default class Game extends Component {
     };
   }
 
+  getSelectPropertyHandler() {
+    return (property) => {
+      this.setState(() => ({ selectedProperty: property }));
+    };
+  }
+
   render() {
     const { title } = this.props;
-    const { playersTurn, player, computer } = this.state;
+    const { selectedProperty, playersTurn, player, computer } = this.state;
+
     return (
       <div>
         <h1>{title}</h1>
@@ -28,8 +36,17 @@ export default class Game extends Component {
           &nbsp;an der Reihe
         </div>
         <div className="cards">
-          <Card animal={player[0]} uncovered={playersTurn} />
-          <Card animal={computer[0]} uncovered={!playersTurn} />
+          <Card
+            animal={player[0]}
+            uncovered={playersTurn}
+            selectedProperty={selectedProperty}
+            onSelectProperty={this.getSelectPropertyHandler()}
+          />
+          <Card
+            animal={computer[0]}
+            uncovered={!playersTurn}
+            selectedProperty={selectedProperty}
+          />
         </div>
       </div>
     );
