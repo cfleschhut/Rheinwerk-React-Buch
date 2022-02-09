@@ -1,27 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Card.css';
 import Animal from './Animal';
 
-const uncovered = false;
-
-export default function Card() {
-  const elephant = new Animal(
-    'Elefant',
-    'placeholder.png',
-    3.3,
-    6000,
-    70,
-    1,
-    40,
-  );
-
+export default function Card({ animal, uncovered }) {
   const front = (
     <div className="card">
-      <h1>{elephant.name ? elephant.name : 'Unbekannt'}</h1>
-      {elephant.image && (
+      <h1>{animal.name ? animal.name : 'Unbekannt'}</h1>
+      {animal.image && (
         <img
-          alt="Elefant"
-          src={`${process.env.PUBLIC_URL}/${elephant.image}`}
+          alt={animal.name}
+          src={`${process.env.PUBLIC_URL}/${animal.image}`}
           height="200"
           width="200"
         />
@@ -34,7 +23,7 @@ export default function Card() {
               <tr key={property}>
                 <td>{animalProperty.label}</td>
                 <td>
-                  {elephant[property]}
+                  {animal[property]}
                   {animalProperty.unit}
                 </td>
               </tr>
@@ -44,12 +33,14 @@ export default function Card() {
       </table>
     </div>
   );
-
   const back = <div className="card back" />;
-
   if (uncovered) {
     return front;
   }
-
   return back;
 }
+
+Card.propTypes = {
+  uncovered: PropTypes.bool.isRequired,
+  animal: PropTypes.instanceOf(Animal).isRequired,
+};
