@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import update from 'immutability-helper';
 import Card from './Card';
 import Animal from './Animal';
 import './Game.css';
@@ -20,7 +21,9 @@ export default class Game extends Component {
 
   getSelectPropertyHandler() {
     return (property) => {
-      this.setState(() => ({ selectedProperty: property }));
+      this.setState((state) =>
+        update(state, { selectedProperty: { $set: property } }),
+      );
     };
   }
 
