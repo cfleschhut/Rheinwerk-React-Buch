@@ -6,6 +6,12 @@ import Animal from './Animal';
 import './Game.css';
 
 export default class Game extends Component {
+  static selectRandomProperty() {
+    const properties = Object.keys(Animal.properties);
+    const index = Math.floor(Math.random() * properties.length);
+    return properties[index];
+  }
+
   constructor(props) {
     super(props);
 
@@ -30,31 +36,37 @@ export default class Game extends Component {
 
   compare(property) {
     let { playersTurn } = this.state;
+    const { player, computer } = this.state;
 
-    const firstPlayer = this.state.player[0];
-    let player = update(this.state.player, { $splice: [[0, 1]] });
-    const firstComputer = this.state.computer[0];
-    let computer = update(this.state.computer, { $splice: [[0, 1]] });
+    const firstPlayer = player[0];
+    let playerCards = update(player, { $splice: [[0, 1]] });
+
+    const firstComputer = computer[0];
+    let computerCards = update(computer, { $splice: [[0, 1]] });
 
     if (firstPlayer[property] > firstComputer[property]) {
       playersTurn = true;
-      player = update(player, { $push: [firstPlayer, firstComputer] });
+      playerCards = update(playerCards, {
+        $push: [firstPlayer, firstComputer],
+      });
 
-      if (computer.length === 0) {
+      if (computerCards.length === 0) {
         alert('Player wins');
         return;
       }
     } else if (firstPlayer[property] < firstComputer[property]) {
       playersTurn = false;
-      computer = update(computer, { $push: [firstPlayer, firstComputer] });
+      computerCards = update(computerCards, {
+        $push: [firstPlayer, firstComputer],
+      });
 
-      if (player.length === 0) {
+      if (playerCards.length === 0) {
         alert('Computer wins');
         return;
       }
     } else {
-      player = update(player, { $push: [firstPlayer] });
-      computer = update(computer, { $push: [firstComputer] });
+      playerCards = update(playerCards, { $push: [firstPlayer] });
+      computerCards = update(computerCards, { $push: [firstComputer] });
     }
 
     this.setState(
@@ -64,18 +76,18 @@ export default class Game extends Component {
             computerUncovered: false,
             selectedProperty: '',
             playersTurn,
-            player,
-            computer,
+            player: playerCards,
+            computer: computerCards,
           },
         }),
       () => {
         if (!playersTurn) {
           setTimeout(() => {
-            const property = this.selectRandomProperty();
-            this.play(property);
+            const randomProperty = Game.selectRandomProperty();
+            this.play(randomProperty);
           }, 2000);
         }
-      },
+      }
     );
   }
 
@@ -90,14 +102,8 @@ export default class Game extends Component {
         setTimeout(() => {
           this.compare(property);
         }, 2000);
-      },
+      }
     );
-  }
-
-  selectRandomProperty() {
-    const properties = Object.keys(Animal.properties);
-    const index = Math.floor(Math.random() * properties.length);
-    return properties[index];
   }
 
   render() {
