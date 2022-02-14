@@ -32,7 +32,7 @@ export default function Card({
               >
                 <td>{animalProperty.label}</td>
                 <td>
-                  {animal[property]}
+                  {animal[property]}&nbsp;
                   {animalProperty.unit}
                 </td>
               </tr>
