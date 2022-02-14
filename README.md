@@ -10,3 +10,15 @@
 - https://github.com/yannickcr/eslint-plugin-react
 - https://github.com/prettier/eslint-config-prettier
 - https://github.com/prettier/eslint-plugin-prettier
+- https://github.com/typicode/json-server
+
+## How to run
+
+```
+# Install dependencies
+npm install
+
+# Run API and app
+npm run api
+npm start
+```
