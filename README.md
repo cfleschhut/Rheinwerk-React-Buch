@@ -11,6 +11,7 @@
 - https://github.com/prettier/eslint-config-prettier
 - https://github.com/prettier/eslint-plugin-prettier
 - https://github.com/typicode/json-server
+- https://axios-http.com/
 
 ## How to run
 

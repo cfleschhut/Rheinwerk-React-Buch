@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
+import axios from 'axios';
 import Card from './Card';
 import Animal from './Animal';
 import './Game.css';
@@ -25,8 +26,7 @@ export default class Game extends Component {
   }
 
   async componentDidMount() {
-    const request = await fetch('http://localhost:3001/card');
-    const data = await request.json();
+    const { data } = await axios.get('http://localhost:3001/card');
     const computer = [];
     const player = [];
 
