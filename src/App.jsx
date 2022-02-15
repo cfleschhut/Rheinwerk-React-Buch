@@ -2,20 +2,22 @@ import React from 'react';
 import Game from './Game.container';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
-import RenderPropsExample from './RenderPropsExample';
-import withCards from './withCards';
+// import RenderPropsExample from './RenderPropsExample';
+import DealCards from './DealCards';
 import './App.css';
-
-const GameWithCards = withCards(Game);
 
 export default function App() {
   return (
     <>
-      <GameWithCards title="Supertrumpf" />
+      <DealCards>
+        {(player, computer) => (
+          <Game title="Supertrumpf" player={player} computer={computer} />
+        )}
+      </DealCards>
 
       {/* <LifecycleExample /> */}
       {/* <HigherOrderComponentExample /> */}
-      <RenderPropsExample />
+      {/* <RenderPropsExample /> */}
     </>
   );
 }
