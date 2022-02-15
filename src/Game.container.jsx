@@ -1,7 +1,7 @@
+/* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
-import axios from 'axios';
 import GameComponent from './Game';
 import Animal from './Animal';
 
@@ -24,35 +24,22 @@ export default class Game extends Component {
     };
   }
 
-  async componentDidMount() {
-    const { data } = await axios.get('http://localhost:3001/card');
-    const computer = [];
-    const player = [];
+  componentDidUpdate(prevProps) {
+    const { player: playerCards, computer: computerCards } = this.props;
 
-    data.forEach((card, index) => {
-      const animal = new Animal(
-        card.name,
-        card.image,
-        card.size,
-        card.weight,
-        card.age,
-        card.offspring,
-        card.speed
+    if (
+      prevProps.player.length === 0 &&
+      playerCards.length > 0 &&
+      prevProps.computer.length === 0 &&
+      computerCards.length > 0
+    ) {
+      this.setState((state) =>
+        update(state, {
+          player: { $set: playerCards },
+          computer: { $set: computerCards },
+        })
       );
-
-      if (index % 2 === 0) {
-        computer.push(animal);
-      } else {
-        player.push(animal);
-      }
-    });
-
-    this.setState((state) =>
-      update(state, {
-        player: { $set: player },
-        computer: { $set: computer },
-      })
-    );
+    }
   }
 
   getSelectPropertyHandler() {
@@ -134,9 +121,9 @@ export default class Game extends Component {
   render() {
     const { title } = this.props;
     const {
-      playersTurn,
       player,
       computer,
+      playersTurn,
       selectedProperty,
       computerUncovered,
     } = this.state;
@@ -161,4 +148,6 @@ Game.defaultProps = {
 
 Game.propTypes = {
   title: PropTypes.string,
+  player: PropTypes.arrayOf(PropTypes.object).isRequired,
+  computer: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
