@@ -2,6 +2,7 @@ import React from 'react';
 import Game from './Game.container';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
+import RenderPropsExample from './RenderPropsExample';
 import withCards from './withCards';
 import './App.css';
 
@@ -14,6 +15,7 @@ export default function App() {
 
       {/* <LifecycleExample /> */}
       {/* <HigherOrderComponentExample /> */}
+      <RenderPropsExample />
     </>
   );
 }
