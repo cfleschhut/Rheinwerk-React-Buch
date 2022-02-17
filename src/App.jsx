@@ -3,6 +3,7 @@ import Game from './Game.container';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
 // import RenderPropsExample from './RenderPropsExample';
+import ContextExample from './ContextExample';
 import DealCards from './DealCards';
 import './App.css';
 
@@ -50,6 +51,7 @@ export default function App() {
       {/* <LifecycleExample /> */}
       {/* <HigherOrderComponentExample /> */}
       {/* <RenderPropsExample /> */}
+      <ContextExample />
     </>
   );
 }
