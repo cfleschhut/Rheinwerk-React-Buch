@@ -3,55 +3,49 @@ import Game from './Game.container';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
 // import RenderPropsExample from './RenderPropsExample';
-import ContextExample from './ContextExample';
+// import ContextExample from './ContextExample';
+import ErrorBoundary from './ErrorBoundary';
 import DealCards from './DealCards';
+import DarkMode from './DarkMode';
+
 import './App.css';
 
-class ErrorBoundary extends Component {
+export default class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      error: null,
+      darkMode: false,
     };
   }
 
-  componentDidCatch(error, info) {
-    console.log(error, info);
-  }
-
-  static getDerivedStateFromError(error) {
-    return {
-      error: error.message,
-    };
-  }
+  toggleDarkMode = () => {
+    this.setState((prevState) => ({ darkMode: !prevState.darkMode }));
+  };
 
   render() {
-    const { error } = this.state;
-
-    if (error) {
-      return <div>{error}</div>;
-    }
+    const { darkMode } = this.state;
 
     return (
-      <DealCards>
-        {(player, computer) => (
-          <Game title="Supertrumpf" player={player} computer={computer} />
-        )}
-      </DealCards>
+      <>
+        <ErrorBoundary>
+          <DarkMode.Provider value={darkMode}>
+            <button type="button" onClick={this.toggleDarkMode}>
+              Toggle Dark Mode
+            </button>
+            <DealCards>
+              {(player, computer) => (
+                <Game title="Supertrumpf" player={player} computer={computer} />
+              )}
+            </DealCards>
+          </DarkMode.Provider>
+        </ErrorBoundary>
+
+        {/* <LifecycleExample /> */}
+        {/* <HigherOrderComponentExample /> */}
+        {/* <RenderPropsExample /> */}
+        {/* <ContextExample /> */}
+      </>
     );
   }
-}
-
-export default function App() {
-  return (
-    <>
-      <ErrorBoundary />
-
-      {/* <LifecycleExample /> */}
-      {/* <HigherOrderComponentExample /> */}
-      {/* <RenderPropsExample /> */}
-      <ContextExample />
-    </>
-  );
 }
