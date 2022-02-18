@@ -13,7 +13,7 @@ export default function Game({
   getSelectPropertyHandler,
 }) {
   return (
-    <div>
+    <>
       <h1>{title}</h1>
       <div className="info">
         {playersTurn ? 'Du bist' : 'Der Computer ist'}
@@ -36,7 +36,7 @@ export default function Game({
           />
         )}
       </div>
-    </div>
+    </>
   );
 }
 

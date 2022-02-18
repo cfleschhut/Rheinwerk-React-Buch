@@ -4,6 +4,7 @@ import Game from './Game.container';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
 // import RenderPropsExample from './RenderPropsExample';
 // import ContextExample from './ContextExample';
+import UseStateExample from './UseStateExample';
 import ErrorBoundary from './ErrorBoundary';
 import DealCards from './DealCards';
 import DarkMode from './DarkMode';
@@ -45,6 +46,7 @@ export default class App extends Component {
         {/* <HigherOrderComponentExample /> */}
         {/* <RenderPropsExample /> */}
         {/* <ContextExample /> */}
+        <UseStateExample />
       </>
     );
   }
