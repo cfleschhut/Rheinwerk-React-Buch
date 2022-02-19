@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Game from './Game.container';
+import Game from './Game';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
 // import RenderPropsExample from './RenderPropsExample';
 // import ContextExample from './ContextExample';
-import UseStateExample from './UseStateExample';
+// import UseStateExample from './UseStateExample';
+// import UseEffectExample from './UseEffectExample';
 import ErrorBoundary from './ErrorBoundary';
-import DealCards from './DealCards';
 import DarkMode from './DarkMode';
 
 import './App.css';
@@ -34,11 +34,7 @@ export default class App extends Component {
             <button type="button" onClick={this.toggleDarkMode}>
               Toggle Dark Mode
             </button>
-            <DealCards>
-              {(player, computer) => (
-                <Game title="Supertrumpf" player={player} computer={computer} />
-              )}
-            </DealCards>
+            <Game title="Supertrumpf" />
           </DarkMode.Provider>
         </ErrorBoundary>
 
@@ -46,7 +42,8 @@ export default class App extends Component {
         {/* <HigherOrderComponentExample /> */}
         {/* <RenderPropsExample /> */}
         {/* <ContextExample /> */}
-        <UseStateExample />
+        {/* <UseStateExample /> */}
+        {/* <UseEffectExample /> */}
       </>
     );
   }
