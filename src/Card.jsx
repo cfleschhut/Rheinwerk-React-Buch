@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './Card.css';
 import Animal from './Animal';
@@ -46,16 +46,10 @@ export default function Card({
 
   const back = <div className="card back" />;
 
-  return (
-    <DarkMode.Consumer>
-      {(darkMode) => {
-        const darkModeClassName = darkMode ? 'dark' : 'light';
-        return (
-          <div className={darkModeClassName}>{uncovered ? front : back}</div>
-        );
-      }}
-    </DarkMode.Consumer>
-  );
+  const darkMode = useContext(DarkMode);
+  const darkModeClassName = darkMode ? 'dark' : 'light';
+
+  return <div className={darkModeClassName}>{uncovered ? front : back}</div>;
 }
 
 Card.defaultProps = {
