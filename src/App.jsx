@@ -6,7 +6,7 @@ import Game from './Game';
 // import ContextExample from './ContextExample';
 // import UseStateExample from './UseStateExample';
 // import UseEffectExample from './UseEffectExample';
-import UseCounterExample from './UseCounterExample';
+// import UseCounterExample from './UseCounterExample';
 import ErrorBoundary from './ErrorBoundary';
 import DarkMode from './DarkMode';
 
@@ -45,7 +45,7 @@ export default class App extends Component {
         {/* <ContextExample /> */}
         {/* <UseStateExample /> */}
         {/* <UseEffectExample /> */}
-        <UseCounterExample />
+        {/* <UseCounterExample /> */}
       </>
     );
   }
