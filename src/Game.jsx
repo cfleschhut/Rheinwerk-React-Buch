@@ -1,11 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+
+import * as React from 'react';
 import Card from './Card';
 import './Game.css';
 import useCards from './useCards';
 
-export default function Game({ title }) {
+type Props = {|
+  title: string,
+|};
+
+export default function Game(props: Props): React.Node {
   const [state, play] = useCards();
+  const { title } = props;
 
   return (
     <>
@@ -35,7 +41,3 @@ export default function Game({ title }) {
     </>
   );
 }
-
-Game.propTypes = {
-  title: PropTypes.string.isRequired,
-};

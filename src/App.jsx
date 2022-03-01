@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import Game from './Game';
 // import LifecycleExample from './LifecycleExample';
 // import HigherOrderComponentExample from './HigherOrderComponentExample';
@@ -9,10 +11,9 @@ import Game from './Game';
 // import UseCounterExample from './UseCounterExample';
 import ErrorBoundary from './ErrorBoundary';
 import DarkMode from './DarkMode';
-
 import './App.css';
 
-export default class App extends Component {
+export default class App extends React.Component<{}, { darkMode: boolean }> {
   constructor() {
     super();
 
@@ -21,11 +22,11 @@ export default class App extends Component {
     };
   }
 
-  toggleDarkMode = () => {
+  toggleDarkMode: () => void = () => {
     this.setState((prevState) => ({ darkMode: !prevState.darkMode }));
   };
 
-  render() {
+  render(): React.Node {
     const { darkMode } = this.state;
 
     return (

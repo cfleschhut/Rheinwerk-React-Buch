@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'airbnb',
+    'plugin:ft-flow/recommended',
     'prettier',
   ],
   parserOptions: {
@@ -15,8 +16,9 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    requireConfigFile: false,
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'ft-flow', 'prettier'],
   rules: {
     // 'prettier/prettier': 'error',
   },
