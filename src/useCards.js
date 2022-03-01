@@ -14,9 +14,11 @@ export default function useCards() {
     computer: [],
   });
 
-  useEffect(async () => {
-    const { data } = await axios.get('http://localhost:3001/card');
-    dealCards(data);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get('http://localhost:3001/card');
+      dealCards(data);
+    })();
   }, []);
 
   useEffect(() => {
