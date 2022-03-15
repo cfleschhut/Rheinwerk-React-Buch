@@ -11,14 +11,14 @@ import ErrorBoundary from './ErrorBoundary';
 import DarkMode from './DarkMode';
 import './App.css';
 
-export default class App extends Component {
-  constructor() {
-    super();
+interface State {
+  darkMode: boolean;
+}
 
-    this.state = {
-      darkMode: false,
-    };
-  }
+export default class App extends Component<unknown, State> {
+  state = {
+    darkMode: false,
+  };
 
   toggleDarkMode = () => {
     this.setState((prevState) => ({ darkMode: !prevState.darkMode }));

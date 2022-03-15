@@ -14,34 +14,6 @@ export default function useCards() {
     computer: [],
   });
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get('http://localhost:3001/card');
-      dealCards(data);
-    })();
-  }, []);
-
-  useEffect(() => {
-    if (state.selectedProperty !== '') {
-      setTimeout(() => {
-        compare(state.selectedProperty);
-      }, 2000);
-    }
-  }, [state.selectedProperty]);
-
-  useEffect(() => {
-    if (
-      state.selectedProperty === '' &&
-      !state.computerUncovered &&
-      !state.playersTurn
-    ) {
-      setTimeout(() => {
-        const randomProperty = selectRandomProperty();
-        play(randomProperty);
-      }, 2000);
-    }
-  }, [state.selectedProperty, state.computerUncovered, state.playersTurn]);
-
   const compare = (property) => {
     let { playersTurn } = state;
     const { player, computer } = state;
@@ -131,6 +103,34 @@ export default function useCards() {
       })
     );
   };
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get('http://localhost:3001/card');
+      dealCards(data);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (state.selectedProperty !== '') {
+      setTimeout(() => {
+        compare(state.selectedProperty);
+      }, 2000);
+    }
+  }, [state.selectedProperty]);
+
+  useEffect(() => {
+    if (
+      state.selectedProperty === '' &&
+      !state.computerUncovered &&
+      !state.playersTurn
+    ) {
+      setTimeout(() => {
+        const randomProperty = selectRandomProperty();
+        play(randomProperty);
+      }, 2000);
+    }
+  }, [state.selectedProperty, state.computerUncovered, state.playersTurn]);
 
   return [state, play];
 }
