@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import './Card.css';
 import Animal from './Animal';
 import DarkMode from './DarkMode';
+
+interface Props {
+  animal: Animal;
+  uncovered: boolean;
+  onSelectProperty: (property: keyof Animal) => void;
+  selectedProperty: string;
+}
 
 export default function Card({
   animal,
   uncovered,
   onSelectProperty,
   selectedProperty,
-}) {
+}: Props) {
   const front = (
     <div className="card">
       <h1>{animal.name ? animal.name : 'Unbekannt'}</h1>
@@ -25,15 +31,16 @@ export default function Card({
         <tbody>
           {Object.keys(Animal.properties).map((property) => {
             const animalProperty = Animal.properties[property];
+
             return (
               <tr
                 key={property}
                 className={selectedProperty === property ? 'active' : ''}
-                onClick={() => onSelectProperty(property)}
+                onClick={() => onSelectProperty(property as keyof Animal)}
               >
                 <td>{animalProperty.label}</td>
                 <td>
-                  {animal[property]}&nbsp;
+                  {animal[property as keyof Animal]}&nbsp;
                   {animalProperty.unit}
                 </td>
               </tr>
@@ -51,15 +58,3 @@ export default function Card({
 
   return <div className={darkModeClassName}>{uncovered ? front : back}</div>;
 }
-
-Card.defaultProps = {
-  onSelectProperty: () => {},
-  selectedProperty: '',
-};
-
-Card.propTypes = {
-  uncovered: PropTypes.bool.isRequired,
-  animal: PropTypes.instanceOf(Animal).isRequired,
-  onSelectProperty: PropTypes.func,
-  selectedProperty: PropTypes.string,
-};

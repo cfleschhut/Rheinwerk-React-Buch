@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Card from './Card';
 import './Game.css';
 import useCards from './useCards';
 
-export default function Game({ title }) {
+interface Props {
+  title: string;
+}
+
+export default function Game({ title }: Props) {
   const [state, play] = useCards();
 
   return (
@@ -29,13 +32,10 @@ export default function Game({ title }) {
             animal={state.computer[0]}
             uncovered={state.computerUncovered}
             selectedProperty={state.selectedProperty}
+            onSelectProperty={() => {}}
           />
         )}
       </div>
     </>
   );
 }
-
-Game.propTypes = {
-  title: PropTypes.string.isRequired,
-};

@@ -28,6 +28,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
     // 'prettier/prettier': 'error',
-    'react/state-in-constructor': 'off',
+    'react/state-in-constructor': 0,
   },
 };

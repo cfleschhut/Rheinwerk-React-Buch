@@ -5,8 +5,26 @@ import axios from 'axios';
 import selectRandomProperty from './selectRandomProperty';
 import Animal from './Animal';
 
-export default function useCards() {
-  const [state, setState] = useState({
+interface Card {
+  name: string;
+  image: string;
+  size: number;
+  weight: number;
+  age: number;
+  offspring: number;
+  speed: number;
+}
+
+interface State {
+  computerUncovered: boolean;
+  selectedProperty: keyof Animal | '';
+  playersTurn: boolean;
+  player: Animal[];
+  computer: Animal[];
+}
+
+export default function useCards(): [State, (property: keyof Animal) => void] {
+  const [state, setState] = useState<State>({
     computerUncovered: false,
     selectedProperty: '',
     playersTurn: true,
@@ -14,7 +32,7 @@ export default function useCards() {
     computer: [],
   });
 
-  const compare = (property) => {
+  const compare = (property: keyof Animal) => {
     let { playersTurn } = state;
     const { player, computer } = state;
 
@@ -63,7 +81,7 @@ export default function useCards() {
   };
 
   const play = useCallback(
-    (property) => {
+    (property: keyof Animal) => {
       setState((prevState) =>
         update(prevState, {
           selectedProperty: { $set: property },
@@ -74,9 +92,9 @@ export default function useCards() {
     [setState]
   );
 
-  const dealCards = (cards) => {
-    const computer = [];
-    const player = [];
+  const dealCards = (cards: Card[]) => {
+    const computer: Animal[] = [];
+    const player: Animal[] = [];
 
     cards.forEach((card, index) => {
       const animal = new Animal(
@@ -114,7 +132,7 @@ export default function useCards() {
   useEffect(() => {
     if (state.selectedProperty !== '') {
       setTimeout(() => {
-        compare(state.selectedProperty);
+        compare(state.selectedProperty as keyof Animal);
       }, 2000);
     }
   }, [state.selectedProperty]);
